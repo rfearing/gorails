@@ -1,6 +1,13 @@
 <h1>Hello User</h1>
 
-<%= form_with model: @user, url: sign_up_path do |form| %>
+<%= form_with model: @user, url: sign_up_path, local: true do |form| %>
+	<% if @user.errors.any? %>
+		<div class="alert alert-danger">
+			<% @user.errors.full_messages.each do |message| %>
+				<div><%= message %></div>
+			<% end %>
+		</div>
+	<% end %>
 	<div class=" form-group mb-3">
 		<%= form.label :email, "Email" %><br />
 		<%= form.text_field :email, class: "form-control" %>
@@ -13,5 +20,5 @@
 		<%= form.label :password_confirmattion, "Password Conformation" %><br />
 		<%= form.password_field :password_confirmattion, class: "form-control" %>
 	</div>
-	<%= form.submit class: "btn btn-primary" %>
+	<%= form.submit data: { turbo: false }, class: "btn btn-primary" %>
 <% end %>
