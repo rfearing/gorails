@@ -1,1 +1,5 @@
 <h1>Welcome to this test app</h1>
+
+<% if @user %>
+	Logged in as: <%= @user.email %>
+<% end %>

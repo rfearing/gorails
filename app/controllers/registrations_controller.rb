@@ -7,7 +7,9 @@ class RegistrationsController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			render_to root_path, notice: "Successfully Created User"
+			# Rails gives us a handy session method:
+			session[:user_id] = @user.id
+			redirect_to root_path, notice: "Successfully Created User"
 		else
 			render :new
 		end
